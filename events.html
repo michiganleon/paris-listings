@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-blOOEyqDvvvsitmEYvyEK9JEYrLu5yLKYaaE1l1i6Cs='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src https://api-adresse.data.gouv.fr; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-TdZ/ism/S58E9rTTR8wy/SKp6qVNIHJZTwxqyKuUuWg='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src https://api-adresse.data.gouv.fr; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -24,7 +24,7 @@
   /* Same system as the cinema page; accent shifted to aubergine for the culture side */
   --bg:#f3f5f2; --surface:#ffffff; --surface-2:#edf0ec; --text:#16201b; --muted:#5b6660; --line:#dbe1db;
   --accent:#6b2f5c; --accent-ink:#ffffff; --chip:#e6ebe6; --imdb:#f5c518; --imdb-ink:#16201b;
-  --douban:#2e963d; --douban-ink:#ffffff; --new:#1f5fbf; --sub:#7a4cc2; --zh:#b23a32; --ok:#2e7d55; --backdrop:rgba(16,24,20,.45); --water:#c9dde6; --land:#fbfcfa; --town:#eef1ec; --home:#c2410c; --pin:#c0267a; --here:#0b6bcb; --work:#1f5fbf; --gold:#8a5a00; --gold-bg:#fbefcf; --shadow:0 1px 2px rgba(20,40,30,.05),0 4px 16px rgba(20,40,30,.04);
+  --douban:#2e963d; --douban-ink:#ffffff; --new:#1f5fbf; --sub:#7a4cc2; --zh:#b23a32; --ok:#2e7d55; --stale:#b45309; --backdrop:rgba(16,24,20,.45); --water:#c9dde6; --land:#fbfcfa; --town:#eef1ec; --home:#c2410c; --pin:#c0267a; --here:#0b6bcb; --work:#1f5fbf; --gold:#8a5a00; --gold-bg:#fbefcf; --shadow:0 1px 2px rgba(20,40,30,.05),0 4px 16px rgba(20,40,30,.04);
   --display:"Instrument Serif",Georgia,"Songti SC","Noto Serif CJK SC",serif;
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
@@ -32,12 +32,12 @@
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --bg:#0f1412; --surface:#161c19; --surface-2:#1e2521; --text:#e6ece8; --muted:#9aa59f; --line:#2a332e;
-    --accent:#e09ad0; --accent-ink:#0f1412; --chip:#232b27; --shadow:none; --new:#58a6ff; --sub:#b48cf2; --zh:#ff7b72; --ok:#62c29d; --backdrop:rgba(0,0,0,.6); --water:#1c3440; --land:#1a211d; --town:#131815; --home:#fb923c; --pin:#f472b6; --here:#5cb0ff; --work:#6aa8ff; --gold:#e8b949; --gold-bg:#3a2e10; color-scheme:dark;
+    --accent:#e09ad0; --accent-ink:#0f1412; --chip:#232b27; --shadow:none; --new:#58a6ff; --sub:#b48cf2; --zh:#ff7b72; --ok:#62c29d; --stale:#fbbf24; --backdrop:rgba(0,0,0,.6); --water:#1c3440; --land:#1a211d; --town:#131815; --home:#fb923c; --pin:#f472b6; --here:#5cb0ff; --work:#6aa8ff; --gold:#e8b949; --gold-bg:#3a2e10; color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
   --bg:#0f1412; --surface:#161c19; --surface-2:#1e2521; --text:#e6ece8; --muted:#9aa59f; --line:#2a332e;
-  --accent:#e09ad0; --accent-ink:#0f1412; --chip:#232b27; --shadow:none; --new:#58a6ff; --sub:#b48cf2; --zh:#ff7b72; --ok:#62c29d; --backdrop:rgba(0,0,0,.6); --water:#1c3440; --land:#1a211d; --town:#131815; --home:#fb923c; --pin:#f472b6; --here:#5cb0ff; --work:#6aa8ff; --gold:#e8b949; --gold-bg:#3a2e10; color-scheme:dark;
+  --accent:#e09ad0; --accent-ink:#0f1412; --chip:#232b27; --shadow:none; --new:#58a6ff; --sub:#b48cf2; --zh:#ff7b72; --ok:#62c29d; --stale:#fbbf24; --backdrop:rgba(0,0,0,.6); --water:#1c3440; --land:#1a211d; --town:#131815; --home:#fb923c; --pin:#f472b6; --here:#5cb0ff; --work:#6aa8ff; --gold:#e8b949; --gold-bg:#3a2e10; color-scheme:dark;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -50,6 +50,9 @@ header{padding:28px 0 8px}
 h1{font-family:var(--display);font-weight:400;font-size:34px;line-height:1.1;margin:0;text-wrap:balance}
 h1 span{color:var(--accent);font-style:italic}
 .sub{color:var(--muted);margin:6px 0 0;font-size:14px}
+.upd{color:var(--muted);margin:5px 0 0;font-size:12.5px;font-family:var(--mono)}
+.upd::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);margin-right:7px;vertical-align:1px}
+.upd.stale{color:var(--stale)} .upd.stale::before{background:var(--stale)}
 .toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--surface)}
 .toggle button{border:0;background:none;color:var(--muted);padding:6px 14px;font:inherit;font-size:14px;cursor:pointer}
 .toggle button[aria-pressed="true"]{background:var(--text);color:var(--bg)}
@@ -304,6 +307,7 @@ dialog .ev .t1{font-size:22px;padding-right:40px}
       <div>
         <h1 data-i18n="title"></h1>
         <p class="sub" id="subtitle"></p>
+        <p class="upd" id="updatedTop"></p>
       </div>
       <div class="toprt">
         <a class="navlink" id="filmsLink" href="index.html" target="_top"></a>
@@ -390,6 +394,8 @@ const I18N = {
     legend: 'In English = held or performed in English · No French needed = music, dance, visual art, or English surtitles / audioguide · Some French = enjoyable, but texts or parts are in French. Events that need French are left out.',
     sources: m => `Listings: Paris open data (Que faire à Paris) and the venues' own websites (museums, Opéra de Paris, Philharmonie, concert halls, jazz clubs, English-language and alternative venues). English-friendliness, categories, English & Chinese titles and summaries by an open-weight model${m ? ` (${m})` : ''} via OpenRouter — check the venue's page before you go.`,
     updated: t => `Updated ${t} (Paris time). Refreshed daily.`,
+    updTop: (when, time) => `Updated ${when} at ${time}`, updToday: 'today', updYesterday: 'yesterday',
+    updStale: n => `${n} days ago, listings may be out of date`,
   },
   zh: {
     title: '巴黎文化 <span>不懂法语也能看</span>',
@@ -428,6 +434,8 @@ const I18N = {
     legend: '英语进行 = 以英语举办或演出 · 无需法语 = 音乐、舞蹈、视觉艺术，或有英文字幕 / 英文导览 · 部分法语 = 可以欣赏，但文字说明或部分内容为法语。需要法语的活动已排除。',
     sources: m => `数据来源：巴黎市开放数据（Que faire à Paris）及各场馆官网（博物馆、巴黎歌剧院、巴黎爱乐、音乐厅、爵士俱乐部、英语及另类场地）。英语友好程度、分类、中英文标题与简介由开源大模型${m ? `（${m}）` : ''}经 OpenRouter 生成——出发前请以场馆页面为准。`,
     updated: t => `更新于 ${t}（巴黎时间），每日刷新。`,
+    updTop: (when, time) => `更新于${when} ${time}`, updToday: '今天', updYesterday: '昨天',
+    updStale: n => `已 ${n} 天未更新，信息可能已过期`,
   },
 };
 
@@ -609,6 +617,13 @@ function renderControls() {
   document.querySelectorAll('[data-lang]').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === state.lang));
   $('#subtitle').textContent = t.subtitle(DATA.events.length, DATA.days.length);
   $('#updated').textContent = t.updated(DATA.generated_at.replace('T', ' ').slice(0, 16));
+  // the same at the top, in words: today / yesterday / a date, flagged once the listings are two or more days old
+  const genDay = DATA.generated_at.slice(0, 10), up = $('#updatedTop');
+  const age = Math.round((Date.parse(parisNow().date + 'T12:00:00Z') - Date.parse(genDay + 'T12:00:00Z')) / 864e5);
+  const when = age <= 0 ? t.updToday : age === 1 ? t.updYesterday
+    : new Intl.DateTimeFormat(state.lang === 'zh' ? 'zh-CN' : 'en-GB', {weekday: 'short', day: 'numeric', month: 'short'}).format(new Date(genDay + 'T12:00:00'));
+  up.textContent = t.updTop(when, DATA.generated_at.slice(11, 16)) + (age >= 2 ? ' · ' + t.updStale(age) : '');
+  up.classList.toggle('stale', age >= 2);
   $('#sources').textContent = t.sources(DATA.llm_model);
   $('#filmsLink').textContent = t.films;
   if ((DATA.links || {}).films) $('#filmsLink').href = DATA.links.films;
