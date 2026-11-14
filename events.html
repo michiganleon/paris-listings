@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-r/5BwSrTXhVT973Xji9BrlJ6jTqhFVhYFX6KiuUlusE='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src https://api-adresse.data.gouv.fr; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-JVWa3iFuFGa+AQUKrfwqhq5wqZsjJXHAEgXPpSRYD5U='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src https://api-adresse.data.gouv.fr; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -681,7 +681,8 @@ function base() {
   setFilt();
   const lv = {easy: ['en', 'friendly'], partial: ['en', 'friendly', 'partial'], en: ['en']}[state.lvl] || ['en', 'friendly'];
   return DATA.events.filter(e => {
-    if (!lv.includes(e.english) && !(e.category === 'museum' && state.lvl !== 'en')) return false;
+    // (museums, and the places your own pass covers, stay listed whatever the language level, except "English only")
+    if (!lv.includes(e.english) && !((e.category === 'museum' || memberOf(e)) && state.lvl !== 'en')) return false;
     if (state.free && !(e.price && e.price.free)) return false;
     if (state.place) {
       const [k, v] = [state.place.slice(0, 1), state.place.slice(2)];
