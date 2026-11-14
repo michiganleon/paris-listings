@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-zobF51FDvW8/rP9y5+KHmR1G3yleaLNHXA/qljySIKE='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src https://api-adresse.data.gouv.fr; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-gXebMOKC9ZCuoQoaZS8DlHO4YHwneAayd11l8tcNqIE='; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https: data:; connect-src https://api-adresse.data.gouv.fr; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -865,6 +865,8 @@ function applySetup(frag) {
     for (const part of decodeURIComponent(frag).split(';')) {
       const x = /^(home|work):(-?\d{1,2}(?:\.\d+)?),(-?\d{1,3}(?:\.\d+)?)$/.exec(part.trim());
       if (x) own.push({key: x[1], lat: +x[2], lon: +x[3]});
+      const pm = /^pass:([a-z+]*)$/.exec(part.trim());      // annual passes, used by the culture page
+      if (pm) shared.set('passes', pm[1].split('+').filter(Boolean).join(','));
     }
   } catch {}
   shared.set('own', JSON.stringify(own));
